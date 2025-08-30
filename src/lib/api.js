@@ -21,8 +21,9 @@ async function get(path) {
 
 export const api = {
   health: () => get("/api/health"),
-  predict: (text) => post("/api/predict", { text }),
+  predict: (text) => post("/api/predict", { text }), // NB still available if you want to demo
   lexicon: (text) => post("/api/lexicon", { text }),
+  signals: (text) => post("/api/signals", { text }), // ✅ make sure this exists
   saveScore: (name, score, total) => post("/api/score", { name, score, total }),
   listScores: () => get("/api/scores"),
   addExample: (text, label) => post("/api/examples", { text, label }),
