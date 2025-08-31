@@ -10,10 +10,6 @@ const QUESTIONS = [
   { text: "We have school tomorrow.", answer: "neutral" },
 ];
 
-/**
- * Props:
- *  - onSaved?: () => void   // parent (QuizPage) can pass a callback to refresh the scores list
- */
 export default function Quiz({ onSaved }) {
   const [idx, setIdx] = useState(0);
   const [score, setScore] = useState(0);
@@ -50,13 +46,13 @@ export default function Quiz({ onSaved }) {
       await api.saveScore(trimmed, score, total);
       setMsg("Saved! 🎉");
 
-      // 3) tell parent to refresh list (auto-reload)
+      // 3) tell parent to refresh list
       onSaved && onSaved();
-     // reset quiz so user must play again before saving another score
-     setIdx(0);
-     setScore(0);
-     setDone(false);
-     setName("");
+      // reseting quiz 
+      setIdx(0);
+      setScore(0);
+      setDone(false);
+      setName("");
     } catch (e) {
       setMsg(e.message || "Could not save score.");
     } finally {

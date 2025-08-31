@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../components/Container.jsx";
 
-export default function About(){
+export default function About() {
   return (
     <Container className="py-8 lg:py-10 xl:py-14">
       <div className="bg-white rounded-2xl shadow-soft p-4 md:p-6">

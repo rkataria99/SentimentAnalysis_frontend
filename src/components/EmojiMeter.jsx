@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EmojiMeter({ label }){
+export default function EmojiMeter({ label }) {
   const map = {
     positive: "😄",
     negative: "☹️",

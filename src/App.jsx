@@ -8,7 +8,7 @@ import About from "./pages/About.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
-export default function App(){
+export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

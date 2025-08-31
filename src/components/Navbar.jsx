@@ -29,7 +29,6 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 bg-gradient-to-r from-indigo-500 to-cyan-400 text-white shadow-soft">
       <Container className="py-2 md:py-3 relative">
         <div className="flex items-center justify-between gap-2">
-          {/* Brand: show a shorter label on very small screens */}
           <Link
             to="/"
             className="font-bold whitespace-nowrap truncate max-w-[65%] text-base sm:text-lg md:text-xl"

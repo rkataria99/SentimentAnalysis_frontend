@@ -3,7 +3,7 @@ import Story from "../components/Story.jsx";
 import LexiconPlay from "../components/LexiconPlay.jsx";
 import Container from "../components/Container.jsx";
 
-export default function Learn(){
+export default function Learn() {
   return (
     <Container className="py-8 lg:py-10 xl:py-14 space-y-6">
       <Story />

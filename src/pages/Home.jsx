@@ -3,16 +3,7 @@ import { Link } from "react-router-dom";
 import SentimentDemo from "../components/SentimentDemo.jsx";
 import Container from "../components/Container.jsx";
 
-/*
-What changed vs your version:
-1) Use fluid typography utilities (fluid-h1 / fluid-lead) you added in index.css.
-2) Widen container on very large screens (max-w up to 2000px) so text spans nicely at 2560/4K.
-3) Reduce vertical padding on tablet (md) to avoid a tiny, pointless scroll for the footer.
-4) Slightly tighter grid gaps on md, and balanced column widths at xl+ so the hero copy has room.
-5) Cap the demo card’s internal height a bit and align to start so it doesn’t push the section taller than necessary.
-*/
-
-export default function Home(){
+export default function Home() {
   return (
     <div>
       <section className="bg-gradient-to-b from-cyan-100 to-indigo-100 border-b">

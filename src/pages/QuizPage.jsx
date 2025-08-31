@@ -3,7 +3,7 @@ import Quiz from "../components/Quiz.jsx";
 import { api } from "../lib/api";
 import Container from "../components/Container.jsx";
 
-export default function QuizPage(){
+export default function QuizPage() {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(false);
 

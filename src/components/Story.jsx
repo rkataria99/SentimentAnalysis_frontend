@@ -1,6 +1,5 @@
 import React from "react";
-
-export default function Story(){
+export default function Story() {
   return (
     <div className="bg-white shadow-soft rounded-2xl p-4 md:p-6">
       <h3 className="text-xl md:text-2xl font-semibold mb-3">

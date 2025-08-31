@@ -7,7 +7,7 @@ async function post(path, body) {
     body: JSON.stringify(body)
   });
   if (!res.ok) {
-    const err = await res.json().catch(()=>({error:"unknown"}));
+    const err = await res.json().catch(() => ({ error: "unknown" }));
     throw new Error(err.error || "Request failed");
   }
   return res.json();

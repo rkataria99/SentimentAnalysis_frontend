@@ -20,7 +20,7 @@ export default function LexiconPlay(){
         placeholder="Type here… e.g., I love sunny days but hate boring homework"
       />
 
-      {/* Chips wrap on small screens; scroll if there are too many */}
+      {/* Chips wrap for small screens */}
       <div className="mt-3 text-base">
         <div className="flex flex-wrap gap-1 max-h-32 overflow-auto pr-1">
           {tokens.map((t, i) => {

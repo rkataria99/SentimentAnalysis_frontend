@@ -2,7 +2,7 @@ import React from "react";
 import SentimentDemo from "../components/SentimentDemo.jsx";
 import Container from "../components/Container.jsx";
 
-export default function Play(){
+export default function Play() {
   return (
     <Container className="py-8 lg:py-10 xl:py-14 space-y-6">
       <SentimentDemo />
