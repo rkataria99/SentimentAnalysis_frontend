@@ -73,7 +73,7 @@ export default function Quiz({ onSaved }) {
           </div>
         </div>
 
-        <h3 className="text-xl md:text-2xl font-semibold mb-2 text-center">Quiz Complete! ✅</h3>
+        <h3 className="text-xl md:text-2xl font-semibold mb-2 text-center">Quiz Complete! </h3>
         <p className="text-lg text-center">
           Your score: <strong>{score}</strong> / {total}
         </p>
@@ -115,7 +115,7 @@ export default function Quiz({ onSaved }) {
 
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-xl md:text-2xl font-semibold mb-1">Quick Quiz 🧠</h3>
+          <h3 className="text-xl md:text-2xl font-semibold mb-1">Quick Quiz </h3>
           <p className="text-sm text-gray-600">
             Question {idx + 1} of {total}
           </p>
