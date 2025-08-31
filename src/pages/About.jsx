@@ -1,20 +1,22 @@
 import React from "react";
+import Container from "../components/Container.jsx";
 
 export default function About(){
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="bg-white rounded-2xl shadow-soft p-6">
-        <h2 className="text-2xl font-bold mb-2">About this project</h2>
-        <p className="text-gray-700">
+    <Container className="py-8 lg:py-10 xl:py-14">
+      <div className="bg-white rounded-2xl shadow-soft p-4 md:p-6">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">About this project</h2>
+        <p className="text-gray-700 content-width">
           This app teaches Sentiment Analysis through a kid-friendly story and interactive demos.
-          We show two approaches: a <strong>Lexicon</strong> (rule) method and a tiny <strong>Naive Bayes</strong> model.
+          We compare a <strong>Lexicon</strong> (rule-based) method with a simple <strong>Signals</strong> method
+          that looks at emojis, exclamation marks, booster/softener words, and the part after “but”.
         </p>
         <ul className="list-disc pl-6 mt-3 text-gray-700 space-y-1">
           <li>Frontend: React + Tailwind</li>
           <li>Backend: Node + Express</li>
-          <li>Database: MongoDB (scores & examples)</li>
+          <li>Database: MongoDB (scores &amp; examples)</li>
         </ul>
       </div>
-    </div>
+    </Container>
   );
 }

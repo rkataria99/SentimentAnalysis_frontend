@@ -2,11 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Theme ---- */
 :root {
   --bg: #f5f7ff;
 }
 
+/* ---- Base ---- */
 body {
   @apply bg-[var(--bg)] text-gray-800;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+}
+
+/* ---- Helpers for responsiveness & readability ---- */
+* { 
+  /* prevent long words/URLs from breaking layouts on any width */
+  word-break: break-word; 
+  overflow-wrap: anywhere; 
+}
+
+img, video { 
+  max-width: 100%; 
+  height: auto; 
+  display: block; 
+}
+
+/* ---- Utility classes you can use in components ---- */
+@layer utilities {
+  /* Fluid, responsive headings and lead text */
+  .fluid-h1 { font-size: clamp(1.75rem, 1.15rem + 2.5vw, 3.75rem); line-height: 1.1; }
+  .fluid-h2 { font-size: clamp(1.5rem, 1.00rem + 1.8vw, 3.00rem); line-height: 1.15; }
+  .fluid-lead { font-size: clamp(1rem, .9rem + .6vw, 1.35rem); line-height: 1.5; }
+
+  /* Keep paragraph widths readable on ultra-wide screens */
+  .content-width { max-width: 72ch; }
+
+  /* Nice scroll cap for result areas inside cards */
+  .card-scroll { max-height: 8rem; overflow: auto; padding-right: .25rem; }
+
+  /* Shortcut for safe wrapping anywhere */
+  .safe-wrap { word-break: break-word; overflow-wrap: anywhere; }
 }

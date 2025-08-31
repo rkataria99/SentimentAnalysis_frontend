@@ -13,7 +13,6 @@ export default function SentimentDemo(){
     setErr("");
     setLoading(true);
     try {
-      // ✅ Now calls Lexicon + Signals (no NB call from UI)
       const [lexOut, sigOut] = await Promise.all([
         api.lexicon(text),
         api.signals(text)
@@ -36,64 +35,104 @@ export default function SentimentDemo(){
         <li><strong>Signals</strong> (kid-friendly): looks at emojis 😊/☹️, “!”, booster words, and the part after “but”.</li>
       </ul>
 
+      {/* NOTE: add break-words to prevent super long inputs from stretching the card */}
       <textarea
         value={text}
         onChange={e=>setText(e.target.value)}
         rows={3}
         placeholder="I love ice cream but homework is boring..."
-        className="w-full border rounded-xl p-3 outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full border rounded-xl p-3 outline-none focus:ring-2 focus:ring-indigo-400 break-words"
       />
-      <button onClick={analyze} disabled={loading || !text.trim()} className="mt-3 px-4 py-2 rounded-xl bg-indigo-600 text-white disabled:opacity-50">
+
+      <button
+        onClick={analyze}
+        disabled={loading || !text.trim()}
+        className="mt-3 px-4 py-2 rounded-xl bg-indigo-600 text-white disabled:opacity-50"
+      >
         {loading ? "Analyzing..." : "Analyze"}
       </button>
 
-      {err && <p className="text-red-600 mt-2">{err}</p>}
+      {err && <p className="text-red-600 mt-2 break-words">{err}</p>}
 
       {(lex || sig) && (
+        // on wide screens show 2 columns; keep gap generous
         <div className="grid md:grid-cols-2 gap-4 mt-4">
+          {/* ---------- LEXICON CARD ---------- */}
           {lex && (
-            <div className="border rounded-xl p-4">
+            // overflow-hidden prevents inner scrollbars from showing outside rounded corners
+            <div className="border rounded-2xl p-4 md:p-5 overflow-hidden">
               <h4 className="font-semibold mb-2">Lexicon Result</h4>
+
               <div className="flex items-center gap-3">
                 <EmojiMeter label={lex.label}/>
-                <div>
-                  <div className="text-sm">Label: <span className="font-semibold">{lex.label}</span></div>
+                <div className="min-w-0">
+                  <div className="text-sm">
+                    Label: <span className="font-semibold">{lex.label}</span>
+                  </div>
                   <div className="text-xs text-gray-600">Score: {lex.score}</div>
                 </div>
               </div>
-              <div className="mt-2 text-sm">
-                {lex.tokens?.map((t, i) => (
-                  <span key={i}
-                        className={
-                          "mr-1 px-1 rounded " +
-                          (lex.details?.find(d=>d.t===t && d.effect===1) ? "bg-green-100" :
-                           lex.details?.find(d=>d.t===t && d.effect===-1) ? "bg-red-100" : "")
-                        }>
-                    {t}
-                  </span>
-                ))}
+
+              {/* CHANGES:
+                  - flex flex-wrap gap-1 → chips wrap instead of overflowing
+                  - max-h-32 overflow-auto pr-1 → cap height and allow smooth scroll
+               */}
+              <div className="mt-3 text-sm">
+                <div className="flex flex-wrap gap-1 max-h-32 overflow-auto pr-1">
+                  {lex.tokens?.map((t, i) => {
+                    const pos = lex.details?.find(d=>d.t===t && d.effect===1);
+                    const neg = lex.details?.find(d=>d.t===t && d.effect===-1);
+                    return (
+                      <span
+                        key={i}
+                        className={[
+                          "inline-block px-2 py-0.5 rounded-lg border",
+                          pos ? "bg-green-50 text-green-800 border-green-200" :
+                          neg ? "bg-red-50 text-red-800 border-red-200" :
+                                "bg-gray-50 text-gray-700 border-gray-200"
+                        ].join(" ")}
+                      >
+                        {t}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}
 
+          {/* ---------- SIGNALS CARD ---------- */}
           {sig && (
-            <div className="border rounded-xl p-4">
+            <div className="border rounded-2xl p-4 md:p-5 overflow-hidden">
               <h4 className="font-semibold mb-2">Signals Result</h4>
+
               <div className="flex items-center gap-3">
                 <EmojiMeter label={sig.label}/>
-                <div>
-                  <div className="text-sm">Label: <span className="font-semibold">{sig.label}</span></div>
+                <div className="min-w-0">
+                  <div className="text-sm">
+                    Label: <span className="font-semibold">{sig.label}</span>
+                  </div>
                   <div className="text-xs text-gray-600">Score: {sig.score}</div>
                 </div>
               </div>
-              <div className="mt-2 text-sm text-gray-700">
+
+              {/* CHANGES:
+                  - space-y-1 → comfy vertical rhythm
+                  - max-h-32 overflow-auto pr-1 → list won’t blow up the card on long evidence
+                  - break-words → long items won’t overflow
+               */}
+              <div className="mt-3 text-sm text-gray-700">
                 {sig.details?.length ? (
-                  <ul className="list-disc pl-5">
+                  <ul className="list-disc pl-5 space-y-1 max-h-32 overflow-auto pr-1">
                     {sig.details.map((d, i) => (
-                      <li key={i}>{d.t} {d.effect !== undefined ? `(${d.effect})` : ""}</li>
+                      <li key={i} className="break-words">
+                        {d.t} {d.effect !== undefined ? `(${d.effect})` : ""}
+                      </li>
                     ))}
                   </ul>
-                ) : <span>No strong signals detected.</span>}
+                ) : (
+                  <span className="text-gray-500">No strong signals detected.</span>
+                )}
               </div>
             </div>
           )}
